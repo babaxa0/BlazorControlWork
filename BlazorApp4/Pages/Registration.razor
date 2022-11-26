@@ -3,34 +3,125 @@
     <h3>Регистрация</h3>
     </u>
     <body>
-        <div class="RegPage">
-            <br>
-            <ruby>Логин:</ruby>
-            <input type="text" id="login" name="login" required size="10"><br><br>
-            <ruby>Пароль:</ruby>
-            <input type="text" id="password" name="password" required size="10"><br><br>
-            <ruby>Повторите пароль:</ruby>
-            <input type="text" id="reppassword" name="reppassword" required size="10"><br><br>
-            <ruby>Имя:</ruby>
-            <input type="text" id="name" name="name" required size="10"><br><br>
-            <ruby>Фамилия:</ruby>
-            <input type="text" id="lastame" name="lastame" required size="10"><br><br>
-            <ruby>Email:</ruby>
-            <input type="text" id="email" name="email" required size="10"><br>
-        </div>
-        <div class="button">
-            <button>Подтвердить</button>
-        </div>
+        <form class="form" action="" method="post">
+            <input class="input" type="text" placeholder="Ваш логин" @bind="Login">
+            <input class="input" type="email" placeholder="Ваш e-mail" @bind="Email">
+             <input class="input" type="tel" placeholder="Ваш телефон" @bind="Phone">
+            <input class="input" type="password" placeholder="Пароль" @bind="Password">
+            <input class="input" type="password" placeholder="Пароль еще раз @bind="SecondPassword"">
+            <p>Выберите должность:</p>
+            <select name="Roles" id="roles" @bind="account.Role">
+              <option value="customer">Заказчик</option>
+              <option value="developer">Застройщик</option>
+              <option value="designer">Проектировщик</option>
+            </select>
+            <div class="zzz">
+                <p>Выберите должность:</p>
+            </div>
+            <select name="Roles" id="roles">
+              <option value="customer">Заказчик</option>
+              <option value="developer">Застройщик</option>
+              <option value="designer">Проектировщик</option>
+            </select>
+            <button class="btn" type="submit">Регистрация</button>
+        </form>
 
         <style>
-        .RegPage {
-            font-size:15px;
-            margin-bottom:8px;
-            font-weight:bolder;
-        }
-    </style>
+             body {
+              font-family: Arial, sans-serif;
+              font-size: 16px;
+              color: #000;
+              background-color: #f8f8f8;
+            }
+
+            * {
+              box-sizing: border-box;
+            }
+
+            .form {
+              max-width: 320px;
+              padding: 15px;
+              margin: 20px auto;
+              background-color: #fff;
+            }
+
+            .input {
+              display: block;
+              width: 100%;
+              padding: 8px 10px;
+              margin-bottom: 10px;
+  
+              border: 1px solid #ccc;
+  
+              font-family: inherit;
+              font-size: 16px;
+            }
+
+            .btn {
+              display: block;
+              width: 100%;
+              padding: 8px 10px;
+  
+              border: 0;
+              background-color: #1cbc11;
+              cursor: pointer;
+  
+              font-family: inherit;
+              font-size: 16px;
+              color: #fff;
+            }
+
+            .btn:hover {
+              background-color: #14a20a;
+            }
+            
+            select{
+                  font-family: inherit;
+                  font-size: 16px;
+                  letter-spacing: inherit;
+                  word-spacing: inherit;
+                  -moz-appearance: none;
+                  -webkit-appearance: none;
+                  appearance: none;
+                  border: 1px solid #ccc;
+                  padding: 0 0.1em;
+                  position:absolute;
+                  top: 430px;
+                  left: 921px;
+                  width:290px;
+                  height:40px;
+                  color: #757575;
+                  background-color: #fff;
+                  padding-left: 8px;
+            }
+            .zzz{
+                color: white;
+            }
+        </style>
     </body>
 
 @code {
+    Account account = new Account();
 
+    Mongo mongo = new Mongo();
+
+    private string Login = string.Empty;
+    private string Email = string.Empty;
+    private string Phone = string.Empty;
+    private string Password = string.Empty;
+    private string SecondPassword = string.Empty;
+
+    void button()
+    {
+        if(Password == SecondPassword)
+        {
+            account.Login = Login;
+            account.Email = Email;
+            account.Phone = Phone;
+            account.Password = Password;
+            account.SecondPassword = SecondPassword;
+            mongo.AddUser(account);
+            NavigationManager.NavigateTo("/Personal_Area");
+        }
+    }
 }

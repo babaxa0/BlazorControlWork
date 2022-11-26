@@ -3,23 +3,62 @@
     <h3>Авторизация</h3>
     </u>
     <body>
-        <div class="LogPage">
-            <br>
-            <ruby>Логин:</ruby>
-            <input type="text" id="registor" name="login" required size="10"><br><br>
-            <ruby>Пароль:</ruby>
-            <input type="text" id="registor" name="password" required size="10"><br><br>
-        </div>
-        <div class="button">
-            <button>Войти</button>
-        </div>
+        <form class="form_log" action="" method="post">
+            <input class="input" type="text" placeholder="Ваш логин">
+            <input class="input" type="password" placeholder="Пароль">
+            <button class="btn" type="submit">Авторизоваться</button>
+        </form>
 
         <style>
-        .LogPage {
-            font-size:15px;
-            margin-bottom:8px;
-            font-weight:bolder;
+
+        body {
+              font-family: Arial, sans-serif;
+              font-size: 16px;
+              color: #000;
+              background-color: #f8f8f8;
         }
+
+        * {
+              box-sizing: border-box;
+        }
+
+        .form_log {
+              max-width: 320px;
+              padding: 15px;
+              margin: 20px auto;
+              background-color: #fff;
+        }
+
+        .input {
+              display: block;
+              width: 100%;
+              padding: 8px 10px;
+              margin-bottom: 10px;
+  
+              border: 1px solid #ccc;
+  
+              font-family: inherit;
+              font-size: 16px;
+         }
+
+        .btn {
+              display: block;
+              width: 100%;
+              padding: 8px 10px;
+  
+              border: 0;
+              background-color: #1cbc11;
+              cursor: pointer;
+  
+              font-family: inherit;
+              font-size: 16px;
+              color: #fff;
+        }
+
+        .btn:hover {
+              background-color: #14a20a;
+        }
+
     </style>
     </body>
 
